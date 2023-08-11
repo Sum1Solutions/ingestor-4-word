@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Analyzer</title>
+
+    <!-- Linking Bootstrap 4 for styling and components -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navbar at the top -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <h1 class="navbar-brand">Document Analyzer</h1>
+    <ul class="navbar-nav ml-auto">
+        <!-- Restart button to refresh the page, reinitializing the upload form -->
+        <li class="nav-item">
+            <a class="nav-link" href="/">Restart</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container mt-5">
+
+
+            <!-- Description of processing steps -->
+            <ul>
+                <li>Step 1: Document Upload</li>
+                <li>Step 2: Break large document into smaller pieces if needed</li>
+                <li>Step 3: Generate embeddings for each piece of text</li>
+                <li>Step 4: Additional processing/analysis</li>
+            </ul>
+
+    <!-- File Upload Form -->
+    <form action="/" method="post" enctype="multipart/form-data" id="uploadForm">
+        <div class="form-group">
+            <label for="file">Upload your document:</label>
+            <input type="file" class="form-control" name="file" required>
+        </div>
+
+
+        <input type="submit" class="btn btn-primary" value="Upload and Process">
+    </form>
+
+    <!-- Progress Bar Section (Initially hidden) -->
+    <div id="progressSection" class="mt-5" style="display: none;">
+        <h3>Processing Progress:</h3>
+        <div class="progress">
+            <!-- Bootstrap progress bar -->
+            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                <span id="progressStatus">Uploading...</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Including necessary JS libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- JS code for simulating progress updates -->
+<script>
+    $(document).ready(function(){
+        // When the form is submitted
+        $('#uploadForm').on('submit', function(e) {
+            e.preventDefault(); // Prevent actual form submission
+            
+            // Display the progress section
+            $('#progressSection').show();
+
+            // Get the progress bar and status elements
+            var progressBar = $('.progress-bar');
+            var progressStatus = $('#progressStatus');
+
+            // Simulate progress updates using setTimeout
+            
+            setTimeout(function() {
+                // Update progress status and width of the bar
+                progressStatus.text('Breaking document...');
+                progressBar.css('width', '25%').attr('aria-valuenow', '25');
+            }, 2000);
+
+            setTimeout(function() {
+                progressStatus.text('Generating embeddings...');
+                progressBar.css('width', '50%').attr('aria-valuenow', '50');
+            }, 4000);
+
+            setTimeout(function() {
+                progressStatus.text('Additional processing...');
+                progressBar.css('width', '75%').attr('aria-valuenow', '75');
+            }, 6000);
+            
+            setTimeout(function() {
+                progressStatus.text('Processing complete!');
+                progressBar.css('width', '100%').attr('aria-valuenow', '100');
+            }, 8000);
+        });
+    });
+</script>
+
+</body>
+</html>
